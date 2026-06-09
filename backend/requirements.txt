@@ -5,7 +5,6 @@ pydantic==2.8.2
 sqlalchemy==2.0.35
 greenlet>=3.0.0
 aiosqlite==0.20.0
-google-genai==2.8.0
 chromadb==0.6.3
 networkx==3.3
 PyPDF2==3.0.1
