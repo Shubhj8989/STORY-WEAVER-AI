@@ -10,10 +10,22 @@ import TimelinePage from './pages/TimelinePage';
 import ContinuityPage from './pages/ContinuityPage';
 import ChatPage from './pages/ChatPage';
 import CreativePage from './pages/CreativePage';
+import LoginPage from './pages/LoginPage';
 import './index.css';
 
 const App: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [user, setUser] = useState(() => localStorage.getItem('storyweaver_username'));
+
+  const handleLoginSuccess = (username: string) => {
+    setUser(username);
+    window.location.reload();
+  };
+
+  if (!user) {
+    return <LoginPage onLoginSuccess={handleLoginSuccess} />;
+  }
+
 
   return (
     <StoryProvider>

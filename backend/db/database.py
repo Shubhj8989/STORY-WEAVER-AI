@@ -12,6 +12,12 @@ AsyncSessionLocal = sessionmaker(engine, class_=AsyncSession, expire_on_commit=F
 Base = declarative_base()
 
 
+class User(Base):
+    __tablename__ = "users"
+    username = Column(String, primary_key=True)
+    password = Column(String, nullable=False)
+
+
 class Story(Base):
     __tablename__ = "stories"
     id = Column(String, primary_key=True)

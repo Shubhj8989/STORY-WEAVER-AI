@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import {
   BookOpen, Users, Map, GitBranch, AlertTriangle,
-  MessageSquare, Upload, Home, Plus, Clock, Sparkles
+  MessageSquare, Upload, Home, Plus, Clock, Sparkles, LogOut
 } from 'lucide-react';
 import { useStory } from '../context/StoryContext';
 import CreateStoryModal from './CreateStoryModal';
@@ -26,6 +26,12 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const { stories, activeStory, setActiveStory } = useStory();
   const [showModal, setShowModal] = useState(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem('storyweaver_username');
+    localStorage.removeItem('storyweaver_session_id');
+    window.location.reload();
+  };
 
   return (
     <>
@@ -99,6 +105,37 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             </p>
           </div>
         )}
+
+        <div style={{ flexGrow: 1 }} />
+
+        {/* User Workspace Info & Logout */}
+        <div style={{
+          padding: '16px 20px',
+          borderTop: '1px solid var(--border)',
+          marginTop: 'auto',
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div>
+              <p style={{ fontSize: 10, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                WORKSPACE
+              </p>
+              <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-primary)' }}>
+                {localStorage.getItem('storyweaver_username')}
+              </p>
+            </div>
+            <button
+              onClick={handleLogout}
+              title="Sign Out"
+              style={{
+                background: 'none', border: 'none', cursor: 'pointer',
+                color: 'var(--text-secondary)', display: 'flex', alignItems: 'center',
+                padding: 6, borderRadius: 'var(--radius-sm)', transition: 'all var(--transition)',
+              }}
+            >
+              <LogOut size={16} />
+            </button>
+          </div>
+        </div>
       </aside>
 
       {showModal && <CreateStoryModal onClose={() => setShowModal(false)} />}

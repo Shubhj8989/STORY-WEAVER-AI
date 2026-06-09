@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from db.database import init_db
-from routers import upload, bible, graph, continuity, chat, creative
+from routers import upload, bible, graph, continuity, chat, creative, auth
 
 
 @asynccontextmanager
@@ -34,6 +34,7 @@ app.include_router(graph.router)
 app.include_router(continuity.router)
 app.include_router(chat.router)
 app.include_router(creative.router)
+app.include_router(auth.router)
 
 
 @app.get("/")
