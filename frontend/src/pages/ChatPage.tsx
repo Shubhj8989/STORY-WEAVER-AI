@@ -113,7 +113,7 @@ const ChatPage: React.FC = () => {
     <div>
       <div className="page-header">
         <h2>AI Story Chat</h2>
-        <p>Ask anything about your story — powered by Gemini + RAG</p>
+        <p>Ask anything about your story — powered by Groq + RAG</p>
       </div>
 
       {!activeStory ? (

@@ -149,7 +149,7 @@ const Dashboard: React.FC = () => {
         <div style={{ display: 'flex', gap: 0, overflow: 'hidden', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)' }}>
           {[
             { step: '01', title: 'Upload', desc: 'Add chapters as text or PDF files', icon: '📤' },
-            { step: '02', title: 'Extract', desc: 'Gemini AI extracts characters, events & relationships', icon: '🤖' },
+            { step: '02', title: 'Extract', desc: 'Groq AI extracts characters, events & relationships', icon: '🤖' },
             { step: '03', title: 'Graph', desc: 'Story becomes a living knowledge graph', icon: '🕸️' },
             { step: '04', title: 'Validate', desc: 'Continuity engine checks every new chapter', icon: '✅' },
             { step: '05', title: 'Chat', desc: 'RAG-powered assistant answers questions', icon: '💬' },

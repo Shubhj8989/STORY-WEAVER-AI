@@ -157,7 +157,7 @@ const UploadPage: React.FC = () => {
           <div className="alert alert-info fade-in" style={{ marginBottom: 16 }}>
             <Loader size={15} style={{ animation: 'spin 1s linear infinite', flexShrink: 0 }} />
             <div>
-              <strong>Gemini is analyzing in the background</strong>
+              <strong>Groq AI is analyzing in the background</strong>
               <p style={{ fontSize: 12, opacity: 0.9, marginTop: 2 }}>
                 Characters, events, and relationships are being extracted. Keep uploading chapters!
               </p>
