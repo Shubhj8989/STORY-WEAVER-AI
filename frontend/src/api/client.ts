@@ -1,8 +1,17 @@
 import axios from 'axios';
 
+let userSessionId = localStorage.getItem('storyweaver_session_id');
+if (!userSessionId) {
+  userSessionId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+  localStorage.setItem('storyweaver_session_id', userSessionId);
+}
+
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000',
-  headers: { 'Content-Type': 'application/json' },
+  headers: {
+    'Content-Type': 'application/json',
+    'X-User-Session': userSessionId,
+  },
 });
 
 export interface Story {

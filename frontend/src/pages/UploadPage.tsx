@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Upload, FileText, CheckCircle, AlertCircle, Loader, ChevronRight, Clock } from 'lucide-react';
 import { useStory } from '../context/StoryContext';
-import { uploadChapter } from '../api/client';
-import axios from 'axios';
+import api, { uploadChapter } from '../api/client';
 
 interface ProcessResult {
   chapter_id: string;
@@ -49,7 +48,7 @@ const UploadPage: React.FC = () => {
     pollRef.current = setInterval(async () => {
       attempts++;
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/upload/chapter/${chapterId}/status`);
+        const res = await api.get(`/api/upload/chapter/${chapterId}/status`);
         const data = res.data;
         if (data.status === 'done') {
           clearInterval(pollRef.current!);

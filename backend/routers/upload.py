@@ -1,7 +1,8 @@
 import uuid
 import json
 import asyncio
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form, BackgroundTasks
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form, BackgroundTasks, Header
+from typing import Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from db.database import get_db, Story, Chapter, Character, Location, Event, Relationship, UniverseRule
@@ -21,10 +22,14 @@ processing_status: dict[str, dict] = {}
 
 
 @router.post("/story", response_model=StoryOut)
-async def create_story(story: StoryCreate, db: AsyncSession = Depends(get_db)):
+async def create_story(
+    story: StoryCreate,
+    db: AsyncSession = Depends(get_db),
+    x_user_session: Optional[str] = Header(None)
+):
     """Create a new story project."""
     story_id = str(uuid.uuid4())
-    db_story = Story(id=story_id, title=story.title, genre=story.genre)
+    db_story = Story(id=story_id, title=story.title, genre=story.genre, user_session_id=x_user_session)
     db.add(db_story)
     await db.commit()
     await db.refresh(db_story)
@@ -32,8 +37,14 @@ async def create_story(story: StoryCreate, db: AsyncSession = Depends(get_db)):
 
 
 @router.get("/stories", response_model=list[StoryOut])
-async def get_stories(db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(Story).order_by(Story.created_at.desc()))
+async def get_stories(
+    db: AsyncSession = Depends(get_db),
+    x_user_session: Optional[str] = Header(None)
+):
+    stmt = select(Story).where(
+        (Story.user_session_id == x_user_session) | (Story.user_session_id.is_(None))
+    ).order_by(Story.created_at.desc())
+    result = await db.execute(stmt)
     return result.scalars().all()
 
 

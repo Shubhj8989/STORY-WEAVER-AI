@@ -19,6 +19,7 @@ class Story(Base):
     genre = Column(String, default="Fantasy")
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
     total_chapters = Column(Integer, default=0)
+    user_session_id = Column(String, nullable=True, index=True)
 
 
 class Character(Base):
@@ -112,6 +113,11 @@ class Chapter(Base):
 async def init_db():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
+        # Inline migration: add user_session_id to stories if it does not exist
+        try:
+            await conn.execute("ALTER TABLE stories ADD COLUMN user_session_id TEXT;")
+        except Exception:
+            pass
 
 
 async def get_db():
