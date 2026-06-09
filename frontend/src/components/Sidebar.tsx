@@ -18,13 +18,18 @@ const navItems = [
   { to: '/chat', icon: MessageSquare, label: 'AI Story Chat' },
 ];
 
-const Sidebar: React.FC = () => {
+interface SidebarProps {
+  isOpen?: boolean;
+  onClose?: () => void;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const { stories, activeStory, setActiveStory } = useStory();
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-      <aside className="sidebar">
+      <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
         <div className="sidebar-logo">
           <h1>✦ Story-Weaver AI</h1>
           <p>Knowledge Graph Copilot</p>
@@ -70,6 +75,7 @@ const Sidebar: React.FC = () => {
             to={to}
             end={to === '/'}
             className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+            onClick={onClose}
           >
             <Icon size={16} />
             {label}
