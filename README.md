@@ -24,7 +24,7 @@ Story-Weaver AI transforms unstructured story text into a living, structured kno
 ```
 Chapter Text
     ↓
-Gemini 1.5 Flash (Entity Extraction)
+Groq llama-3.3-70b-versatile (Entity Extraction)
     ↓
 Knowledge Graph (NetworkX) + Story Bible (SQLite)
     ↓
@@ -43,7 +43,7 @@ Continuity Engine + Story Chat
 | Styling | Custom CSS (dark theme) |
 | Graph Visualization | React Flow |
 | Backend | Python + FastAPI |
-| AI | Google Gemini 1.5 Flash |
+| AI | groq llama-3.3-70b-versatile |
 | Vector Store | ChromaDB |
 | Database | SQLite (async) |
 | Knowledge Graph | NetworkX |
@@ -65,9 +65,9 @@ venv\Scripts\activate     # Windows
 # Install dependencies
 pip install -r requirements.txt
 
-# Set your Gemini API key
+# Set your Groq API key
 copy .env.example .env
-# Edit .env and add your GEMINI_API_KEY
+# Edit .env and add your GROQ_API_KEY
 # Optional: set STORYWEAVER_ENABLE_CREATIVE_AI=true to let Gemini enhance Creative Guidance.
 # By default Creative Guidance uses fast deterministic insights from the extracted Story Bible.
 
@@ -75,7 +75,6 @@ copy .env.example .env
 uvicorn main:app --reload --port 8000
 ```
 
-Get a free Gemini API key at: https://aistudio.google.com/app/apikey
 
 ### 2. Setup Frontend
 
