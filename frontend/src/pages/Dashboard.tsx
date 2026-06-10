@@ -148,15 +148,16 @@ const Dashboard: React.FC = () => {
         <h3 className="section-title" style={{ marginTop: 40 }}>How Story-Weaver AI Works</h3>
         <div style={{ display: 'flex', gap: 0, overflow: 'hidden', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border)' }}>
           {[
-            { step: '01', title: 'Upload', desc: 'Add chapters as text or PDF files', icon: '📤' },
-            { step: '02', title: 'Extract', desc: 'Groq AI extracts characters, events & relationships', icon: '🤖' },
-            { step: '03', title: 'Graph', desc: 'Story becomes a living knowledge graph', icon: '🕸️' },
-            { step: '04', title: 'Validate', desc: 'Continuity engine checks every new chapter', icon: '✅' },
-            { step: '05', title: 'Chat', desc: 'RAG-powered assistant answers questions', icon: '💬' },
+            { step: '01', title: 'Add New Story', desc: 'Create a new story project', icon: '➕' },
+            { step: '02', title: 'Upload', desc: 'Add chapters as text or PDF files', icon: '📤' },
+            { step: '03', title: 'Extract', desc: 'Groq AI extracts characters, events & relationships', icon: '🤖' },
+            { step: '04', title: 'Graph', desc: 'Story becomes a living knowledge graph', icon: '🕸️' },
+            { step: '05', title: 'Validate', desc: 'Continuity engine checks every new chapter', icon: '✅' },
+            { step: '06', title: 'Chat', desc: 'RAG-powered assistant answers questions', icon: '💬' },
           ].map((s, i) => (
             <div key={s.step} style={{
               flex: 1, padding: '24px 16px', background: 'var(--bg-card)',
-              borderRight: i < 4 ? '1px solid var(--border)' : 'none',
+              borderRight: i < 5 ? '1px solid var(--border)' : 'none',
               textAlign: 'center'
             }}>
               <div style={{ fontSize: 24, marginBottom: 10 }}>{s.icon}</div>
